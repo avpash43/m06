@@ -62,6 +62,8 @@ class DataHandlerTest {
         when(cageGeocoderUtil.getAddress(any(), anyDouble(), anyDouble())).thenReturn(address);
         when(address.getCity()).thenReturn("Coalville");
         when(address.getCountryCode()).thenReturn("us");
+        when(address.getRoad()).thenReturn("W 120 S");
+        when(address.getHouseNumber()).thenReturn("500");
 
         Dataset<Row> result = dataHandler.checkHotelsLatLng(dsFilteredHotels);
 
