@@ -24,6 +24,8 @@ public class CageGeocoderUtil implements Serializable {
             return Address.builder()
                     .countryCode(Optional.ofNullable(components.getCountryCode()).orElse(""))
                     .city(Optional.ofNullable(components.getTown()).orElse(""))
+                    .houseNumber(Optional.ofNullable(components.getHouseNumber()).orElse(""))
+                    .road(Optional.ofNullable(components.getRoad()).orElse(""))
                     .build();
         } else {
             return Address.builder()

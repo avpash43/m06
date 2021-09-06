@@ -43,7 +43,7 @@ public class DataHandler implements Serializable {
                         double lng = Double.parseDouble(row.getAs("Longitude"));
                         Address address = cageGeocoderUtil.getAddress(jOpenCageGeocoder, lat, lng);
 
-                        boolean correctAddr = isCorrectCountry(row, address) && isCorrectCity(row, address);
+                        boolean correctAddr = isCorrectCountry(row, address) && isCorrectCity(row, address) && isCorrectAddress(row, address);
 
                         if(correctAddr) {
                             result.add(row);
@@ -61,6 +61,11 @@ public class DataHandler implements Serializable {
 
     private boolean isCorrectCountry(Row row, Address address) {
         return address.getCountryCode().equalsIgnoreCase(row.getAs("Country"));
+    }
+
+    private boolean isCorrectAddress(Row row, Address address) {
+        String housePlusStreet = String.format("%s %s", address.getHouseNumber(), address.getRoad());
+        return housePlusStreet.equalsIgnoreCase(row.getAs("Address"));
     }
 
     public Dataset<Row> generateGeoHash(Dataset<Row> dataset, String hashColumnName, String latColumnName, String lngColumnName) {
